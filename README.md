@@ -1,7 +1,9 @@
 # Easy Peasy Quest
 
 Easy Peasy Quest is a lightweight, short RPG game, made without any game engine, only using C++ and SFML as a dependency (maybe other helpful dependencies will be added later).
+
 The purpose of this project is to sharpen a little bit my rusty C++ skills and to get a better understanding about game development.
+
 More details will come later!
 
 ## Project dependencies
