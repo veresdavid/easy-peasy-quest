@@ -3,6 +3,9 @@
 #include <string>
 #include <sstream>
 
+#include "GameConfiguration.h"
+#include "Game.h"
+
 bool isRunning = true;
 sf::CircleShape shape(100.f);
 int circleSpeed = 100;
@@ -43,8 +46,21 @@ std::string generateWindowTitle(int fps, int ups) {
     return ss.str();
 }
 
+class Base {
+public:
+    virtual void dummy() = 0;
+};
+
+class Foo : public Base {
+public:
+    void dummy() override {
+        std::cout << "Dummy" << std::endl;
+    }
+};
+
 int main()
 {
+    /*
     sf::RenderWindow window(sf::VideoMode(640, 480), "Easy Peasy Quest");
     shape.setFillColor(sf::Color::Green);
 
@@ -103,6 +119,26 @@ int main()
         // sleep till next update
         sf::sleep(sf::microseconds(UPDATE_TIME) - sf::microseconds(updateDeltaTime));
     }
+    */
+
+    GameConfiguration* gameConfiguration = new GameConfiguration();
+    gameConfiguration->maxUpdatesPerSecond = 60;
+    gameConfiguration->maxFramesPerSecond = 60;
+    gameConfiguration->updateTime = 1000000.0 / 60.0;
+    gameConfiguration->frameTime = 1000000.0 / 60.0;
+    gameConfiguration->windowWidth = 640;
+    gameConfiguration->windowHeight = 480;
+    gameConfiguration->windowTitle = "Easy Peasy Quest";
+
+    Game* game = new Game(gameConfiguration);
+    game->init();
+    game->run();
+    game->destroy();
+
+    delete game;
+    game = nullptr;
+    delete gameConfiguration;
+    gameConfiguration = nullptr;
 
     return 0;
 }
