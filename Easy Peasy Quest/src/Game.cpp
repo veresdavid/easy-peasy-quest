@@ -1,6 +1,6 @@
 #include "Game.h"
-#include "DummyEntity.h"
-#include <memory>
+#include "Player.h"
+#include "PlayerMovementHandler.h"
 
 Game::Game(GameConfiguration* gameConfiguration)
 {
@@ -13,10 +13,10 @@ void Game::init()
 	this->clock = new sf::Clock();
 
 	// TODO: only for testing, remove it later!
-	DummyEntity* entityOne = new DummyEntity("Entity #1");
-	DummyEntity* entityTwo = new DummyEntity("Entity #2");
-	this->entities.push_back(entityOne);
-	this->entities.push_back(entityTwo);
+	Player* player = new Player();
+	PlayerMovementHandler* playerMovementHandler = new PlayerMovementHandler(player);
+	this->entities.push_back(player);
+	this->entities.push_back(playerMovementHandler);
 }
 
 void Game::destroy()

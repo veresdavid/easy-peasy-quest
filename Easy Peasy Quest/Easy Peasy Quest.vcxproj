@@ -149,12 +149,16 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameConfiguration.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\PlayerMovementHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DummyEntity.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameConfiguration.h" />
+    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\PlayerMovementHandler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
