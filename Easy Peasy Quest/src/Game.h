@@ -4,6 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "GameConfiguration.h"
 #include "Entity.h"
+#include "Player.h"
 
 #include <vector>
 
@@ -12,7 +13,9 @@ private:
 	bool isRunning;
 	sf::Clock* clock;
 	sf::RenderWindow* window;
+	sf::View* view;
 	GameConfiguration* gameConfiguration;
+	Player* player;
 	std::vector<Entity*> entities;
 public:
 	Game(GameConfiguration* gameConfiguration);

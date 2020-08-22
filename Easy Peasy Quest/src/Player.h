@@ -8,9 +8,11 @@ class Player : public Entity {
 private:
 	sf::CircleShape* circleShape;
 public:
+	float x;
+	float y;
 	float speed;
 
-	Player();
+	Player(float x, float y);
 	~Player();
 
 	void update(double delta);

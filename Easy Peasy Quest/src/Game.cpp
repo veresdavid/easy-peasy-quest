@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "Player.h"
 #include "PlayerMovementHandler.h"
+#include "PlayerCamera.h"
+#include "Marker.h"
 
 Game::Game(GameConfiguration* gameConfiguration)
 {
@@ -10,19 +12,40 @@ Game::Game(GameConfiguration* gameConfiguration)
 void Game::init()
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(gameConfiguration->windowWidth, gameConfiguration->windowHeight), gameConfiguration->windowTitle);
+	this->view = new sf::View(sf::FloatRect(0, 0, gameConfiguration->windowWidth, gameConfiguration->windowHeight));
+	this->window->setView(*this->view);
 	this->clock = new sf::Clock();
 
 	// TODO: only for testing, remove it later!
-	Player* player = new Player();
+	// markers for the corners
+	Marker* upperLeft = new Marker(0, 0, 100, 100);
+	Marker* upperRight = new Marker(540, 0, 100, 100);
+	Marker* lowerLeft = new Marker(0, 380, 100, 100);
+	Marker* lowerRight = new Marker(540, 380, 100, 100);
+
+	// player
+	Player* player = new Player(270, 190);
+	this->player = player;
 	PlayerMovementHandler* playerMovementHandler = new PlayerMovementHandler(player);
+	PlayerCamera* playerCamera = new PlayerCamera(player, this->window, this->view);
+
+	// register entities
+	this->entities.push_back(upperLeft);
+	this->entities.push_back(upperRight);
+	this->entities.push_back(lowerLeft);
+	this->entities.push_back(lowerRight);
 	this->entities.push_back(player);
 	this->entities.push_back(playerMovementHandler);
+	this->entities.push_back(playerCamera);
 }
 
 void Game::destroy()
 {
 	delete window;
 	this->window = nullptr;
+
+	delete view;
+	this->view = nullptr;
 
 	delete clock;
 	this->clock = nullptr;
